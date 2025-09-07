@@ -36,7 +36,25 @@ const loadallTrees = () => {
         btnclicked.classList.add("active")
         displayallTrees(alltrees.plants)
     })
-}
+};
+
+
+const loadDetails = (id) => {
+    const url = `https://openapi.programming-hero.com/api/plant/${id}`;
+    // console.log(url);
+    fetch(url)
+    .then((res) => res.json())
+    .then((details) => displayDetails(details.plants))
+};
+
+
+const displayDetails = (details) =>{
+    console.log(details);
+    
+    const detailsBox = document.getElementById("details-container");
+    detailsBox.innerHTML = "hi my nam eis jhonko";
+    document.getElementById('my_modal_5').showModal();
+};
 
 
 // "id": 1,
@@ -60,7 +78,7 @@ const displayallTrees = (trees) => {
                     </div>
 
                     <div class="py-2">
-                      <h3 class="py-2 inter font-semibold text-[14px]">${tree.name}</h3>
+                      <h3 onclick= "loadDetails(${tree.id})" class="py-2 inter font-semibold text-[14px]">${tree.name}</h3>
                       <p class="inter text-[12px] opacity-80 overflow-hidden text-ellipsis line-clamp-3">${tree.description}</p>
                     </div>
 
@@ -95,7 +113,7 @@ const displayCard = (cards) => {
                     </div>
 
                     <div class="py-2">
-                      <h3 class="py-2 inter font-semibold text-[14px]">${card.name}</h3>
+                      <h3 onclick= "loadDetails(${card.id})" class="py-2 inter font-semibold text-[14px]">${card.name}</h3>
                       <p class="inter text-[12px] opacity-80 overflow-hidden text-ellipsis line-clamp-3">${card.description}</p>
                     </div>
 
