@@ -15,6 +15,7 @@ const removeActive = () =>{
 
 
 const loadTrees = (id) =>{
+    manageSpinner(true);
     const treeURL = `https://openapi.programming-hero.com/api/category/${id}`;
     fetch(treeURL)
     .then((res) => res.json())
@@ -27,6 +28,7 @@ const loadTrees = (id) =>{
 };
 
 const loadallTrees = () => {
+    manageSpinner(true);
     const alltrees = 'https://openapi.programming-hero.com/api/plants'
     fetch(alltrees)
     .then((res) => res.json())
@@ -48,13 +50,53 @@ const loadDetails = (id) => {
 };
 
 
-const displayDetails = (details) =>{
-    console.log(details);
-    
-    const detailsBox = document.getElementById("details-container");
-    detailsBox.innerHTML = "hi my nam eis jhonko";
-    document.getElementById('my_modal_5').showModal();
+const manageSpinner = (status)=>{
+    if(status == true){
+        document.getElementById("spinner").classList.remove("hidden")
+        document.getElementById("card-container").classList.add("hidden")
+    }else{
+        document.getElementById("card-container").classList.remove("hidden")
+        document.getElementById("spinner").classList.add("hidden")
+    }
 };
+
+const loadCart = (items)=> {
+    fetch(`https://openapi.programming-hero.com/api/plant/${items}`)
+    .then((res) => res.json())
+    .then((cart) => displayCart(cart.plants))
+}
+
+
+const displayCart = (cartItem) => {
+    console.log(cartItem);
+    const cartContainer = document.getElementById("cart-container")
+    cartContainer.innerHTML ="";
+
+        const cartItemBtn = document.createElement('div')
+        cartItemBtn.innerHTML = `
+        amefasdjfklasdjflkjadsklfhdjksf
+        `
+
+        cartContainer.append(cartItemBtn);
+}
+
+
+const displayDetails = (details) => {
+    // console.log(details);
+    
+    const detailsBox = document.getElementById("detail-container");
+    detailsBox.innerHTML = `
+     <div class="bg-white">
+      <h1 class="font-bold inter text-[32px]">${details.name}</h1>
+      <img class="py-3 rounded-4xl h-[350px] w-full object-cover" src="${details.image}" alt="">
+      <p><span class="inter font-bold">Category:</span> ${details.category}</p>
+      <p class="py-3"><span class="inter font-bold">Price:</span> ৳${details.price}</p>
+      <p><span class="inter font-bold">Description:</span> ${details.description}</p>
+      </div>
+    `;
+    document.getElementById('my_modal_3').showModal();
+};
+
 
 
 // "id": 1,
@@ -84,15 +126,16 @@ const displayallTrees = (trees) => {
 
                     <div class="flex items-center justify-between py-2">
                       <h2 class="inter text-[14px] text-[#15803D] bg-[#DCFCE7] rounded-full p-2.5">${tree.category}</h2>
-                      <p class="inter text-[14px] font-semibold">$${tree.price}</p>
+                      <p class="inter text-[14px] font-semibold">৳${tree.price}</p>
                     </div>
 
-                    <button class="btn btn-wide bg-[#15803D] self-end rounded-full text-white">Add To Cart</button>
+                    <button onclick="loadCart(${tree.id})" class="btn btn-wide w-full bg-[#15803D] self-end rounded-full text-white">Add To Cart</button>
                   </div>
         `
 
         cardContainer.append(cardsDiv);
     }
+    manageSpinner(false);
 }
 
 
@@ -119,16 +162,17 @@ const displayCard = (cards) => {
 
                     <div class="flex items-center justify-between py-2">
                       <h2 class="inter text-[14px] text-[#15803D] bg-[#DCFCE7] rounded-full p-2.5">${card.category}</h2>
-                      <p class="inter text-[14px] font-semibold">$${card.price}</p>
+                      <p class="inter text-[14px] font-semibold">৳${card.price}</p>
                     </div>
 
-                    <button class="btn btn-wide bg-[#15803D] self-end rounded-full text-white">Add To Cart</button>
+                    <button onclick="loadCart(${card})" class="btn btn-wide bg-[#15803D] self-end rounded-full text-white">Add To Cart</button>
                   </div>
       
         `
         //append
         cardContainer.append(cardsDiv)
     }
+    manageSpinner(false);
 }
 
 
@@ -141,7 +185,7 @@ const displayCatergory = (catergories) => {
     
         const allPlantbtn = document.createElement("div")
         allPlantbtn.innerHTML = `
-        <button id="allBtn" onclick= "loadallTrees()" class="bg-none w-full hover:bg-[#15803D] all-TreeBtn active delay-700 border-none hover:text-white text-left py-2 px-1 inter rounded-[6px]">All Plants</button>
+        <button id="allBtn" onclick= "loadallTrees()" class="bg-none w-full hover:bg-[#15803D] my-1 all-TreeBtn active delay-700 border-none hover:text-white text-left py-2 px-1 inter rounded-[6px]">All Plants</button>
         `
         categoryContainer.appendChild(allPlantbtn);
 
@@ -153,7 +197,7 @@ const displayCatergory = (catergories) => {
 
         const categoryBtns = document.createElement("div")
         categoryBtns.innerHTML = `
-        <button id="btn-${category.id}" onclick= "loadTrees(${category.id})" class="all-TreeBtn bg-none w-full hover:bg-[#15803D] delay-700 border-none hover:text-white text-left py-2 px-1 inter rounded-[6px]">${category.category_name}</button>
+        <button id="btn-${category.id}" onclick= "loadTrees(${category.id})" class="all-TreeBtn my-1 bg-none w-full hover:bg-[#15803D] delay-700 border-none hover:text-white text-left py-2 px-1 inter rounded-[6px]">${category.category_name}</button>
         `
 
         // append
