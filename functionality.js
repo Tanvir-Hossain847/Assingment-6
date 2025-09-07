@@ -6,11 +6,36 @@ fetch(url)
 )
 };
 
+
+const removeActive = () =>{
+    const alltreebtn = document.querySelectorAll(".all-TreeBtn")
+    alltreebtn.forEach((btn => btn.classList.remove("active")))
+    
+}
+
+
 const loadTrees = (id) =>{
     const treeURL = `https://openapi.programming-hero.com/api/category/${id}`;
     fetch(treeURL)
     .then((res) => res.json())
-    .then((treeData) => displayCard(treeData.plants)) 
+    .then((treeData) => {
+        removeActive()
+        const btnclicked = document.getElementById(`btn-${id}`)
+        btnclicked.classList.add("active")
+        displayCard(treeData.plants)
+    }) 
+};
+
+const loadallTrees = () => {
+    const alltrees = 'https://openapi.programming-hero.com/api/plants'
+    fetch(alltrees)
+    .then((res) => res.json())
+    .then((alltrees) => {
+        removeActive()
+        const btnclicked = document.getElementById(`allBtn`)
+        btnclicked.classList.add("active")
+        displayallTrees(alltrees.plants)
+    })
 }
 
 
@@ -20,6 +45,37 @@ const loadTrees = (id) =>{
 // "description": "A fast-growing tropical tree that produces delicious, juicy mangoes during summer. Its dense green canopy offers shade, while its sweet fruits are rich in vitamins and minerals.",
 // "category": "Fruit Tree",
 // "price": 500
+
+const displayallTrees = (trees) => {    
+    const cardContainer = document.getElementById('card-container')
+    cardContainer.innerHTML = "";
+     // all trees
+    for(let tree of trees){
+        const cardsDiv = document.createElement('div')
+        cardsDiv.innerHTML = `
+        <div class="card bg-white p-4 h-100">
+                    
+                    <div>
+                      <img class="object-cover rounded-[8px] h-[150px] w-full" src="${tree.image}" alt="">
+                    </div>
+
+                    <div class="py-2">
+                      <h3 class="py-2 inter font-semibold text-[14px]">${tree.name}</h3>
+                      <p class="inter text-[12px] opacity-80 overflow-hidden text-ellipsis line-clamp-3">${tree.description}</p>
+                    </div>
+
+                    <div class="flex items-center justify-between py-2">
+                      <h2 class="inter text-[14px] text-[#15803D] bg-[#DCFCE7] rounded-full p-2.5">${tree.category}</h2>
+                      <p class="inter text-[14px] font-semibold">$${tree.price}</p>
+                    </div>
+
+                    <button class="btn btn-wide bg-[#15803D] self-end rounded-full text-white">Add To Cart</button>
+                  </div>
+        `
+
+        cardContainer.append(cardsDiv);
+    }
+}
 
 
 const displayCard = (cards) => {
@@ -32,23 +88,23 @@ const displayCard = (cards) => {
         // create a div
         const cardsDiv = document.createElement('div')
         cardsDiv.innerHTML = `
-        <div class="card bg-white p-4 w-full h-full">
+        <div class="card bg-white p-4 h-100">
                     
                     <div>
-                      <img src="${card.image}" alt="">
+                      <img class="object-cover rounded-[8px] h-[150px] w-full" src="${card.image}" alt="">
                     </div>
 
                     <div class="py-2">
                       <h3 class="py-2 inter font-semibold text-[14px]">${card.name}</h3>
-                      <p class="inter text-[12px] opacity-80">${card.description}</p>
+                      <p class="inter text-[12px] opacity-80 overflow-hidden text-ellipsis line-clamp-3">${card.description}</p>
                     </div>
 
                     <div class="flex items-center justify-between py-2">
                       <h2 class="inter text-[14px] text-[#15803D] bg-[#DCFCE7] rounded-full p-2.5">${card.category}</h2>
-                      <p class="inter text-[14px] font-semibold">${card.price}</p>
+                      <p class="inter text-[14px] font-semibold">$${card.price}</p>
                     </div>
 
-                    <button class="btn btn-wide bg-[#15803D] rounded-full text-white">Add To Cart</button>
+                    <button class="btn btn-wide bg-[#15803D] self-end rounded-full text-white">Add To Cart</button>
                   </div>
       
         `
@@ -65,21 +121,21 @@ const displayCatergory = (catergories) => {
     categoryContainer.innerHTML = "";
     
     
-    // category_name : "Fruit Tree"
-    // id : 1
-// small_description: "Trees that bear edible fruits like mango, guava, and jackfruit."
-
-
-
+        const allPlantbtn = document.createElement("div")
+        allPlantbtn.innerHTML = `
+        <button id="allBtn" onclick= "loadallTrees()" class="bg-none w-full hover:bg-[#15803D] all-TreeBtn active delay-700 border-none hover:text-white text-left py-2 px-1 inter rounded-[6px]">All Plants</button>
+        `
+        categoryContainer.appendChild(allPlantbtn);
 
     // get each elements
     for(let category of catergories){
         // create a element
         // console.log(category);
         
+
         const categoryBtns = document.createElement("div")
         categoryBtns.innerHTML = `
-        <button onclick= "loadTrees(${category.id})" class="bg-none w-full hover:bg-[#15803D] delay-700 border-none hover:text-white text-left py-2 px-1 inter rounded-[6px]">${category.category_name}</button>
+        <button id="btn-${category.id}" onclick= "loadTrees(${category.id})" class="all-TreeBtn bg-none w-full hover:bg-[#15803D] delay-700 border-none hover:text-white text-left py-2 px-1 inter rounded-[6px]">${category.category_name}</button>
         `
 
         // append
@@ -90,3 +146,4 @@ const displayCatergory = (catergories) => {
 
 
 loadCategoryBtn();
+loadallTrees();
