@@ -88,10 +88,10 @@
                 <span id="spinner" class="py-10 loading loading-dots loading-xl hidden absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"></span>
               </div>
 
-               <div class="choose-tree pt-[40px] grid lg:grid-cols-12 grid-cols-1 gap-7 justify-center lg:w-11/12 mx-auto">
+               <div class="choose-tree pt-[40px] lg:flex justify-between gap-7 lg:w-11/12 mx-auto">
               
 
-              <div class="catagory-container lg:col-span-2 space-y-3">
+              <div class="catagory-container space-y-3 grow-0 shrink-0 basis-[18%]">
                 <h1 class="inter font-semibold text-[20px]">Categories</h1>
                 <div id="catagory-container" class="">
 
@@ -99,15 +99,21 @@
                 </div>
 
                 
-                <div id="card-container" class="lg:col-span-8 grid lg:grid-cols-3 grid-cols-1 gap-4">
+                <div id="card-container" class="grow-0 shrink-0 basis-[62%] grid lg:grid-cols-3 grid-cols-1 gap-4">
              
                 </div>
 
 
-                <div class="lg:col-span-2 bg-white p-3 rounded-2xl h-140">
+                <div class="bg-white p-3 rounded-2xl grow-0 shrink-0 basis-[18%]">
                 <h1 class="inter font-semibold text-[20px]">Your Cart</h1>
-                <div id="cart-container" class="">
 
+                <div id="cart-container" class="py-4">
+
+                </div>
+
+                <div id="total" class="flex items-center justify-between">
+                  <h1 class="inter font-semibold">Total</h1>
+                  <p>৳<span id="amount">2000</span></p>
                 </div>
                 </div>
 

@@ -60,11 +60,54 @@ const manageSpinner = (status)=>{
     }
 };
 
+
+const cart = [];
+
 const loadCart = (items)=> {
     fetch(`https://openapi.programming-hero.com/api/plant/${items}`)
     .then((res) => res.json())
-    .then((cart) => displayCart(cart.plants))
+    .then((data) => {
+        const plant = data.plants;
+
+        const exists = cart.find(item => item.id === plant.id);
+
+        if(!exists){
+            cart.push({...plant, quantity : 1});
+        }else{
+            exists.quantity += 1;
+        }
+        // cart.push(data.plants)
+        displayCart(cart)
+    })
 }
+
+
+function removediv(button, index){
+
+    cart.splice(index, 1);
+
+    displayCart(cart);
+    
+    totalAddCalculation();
+}
+
+
+const totalAddCalculation = () =>{
+    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity),0);
+    document.getElementById("amount").innerHTML = total;
+};
+
+
+// const minus = () =>{
+//     const crosses = document.querySelectorAll('.xmark')
+//     for(let cross of crosses){
+//         cross.addEventListener('click', () =>{
+//             const sum = totalAddCalculation();
+//             const total = sum - (item.price * item.quantity);
+//             document.getElementById("amount").innerHTML = total;
+//         })
+//     }
+// }
 
 
 const displayCart = (cartItem) => {
@@ -72,12 +115,21 @@ const displayCart = (cartItem) => {
     const cartContainer = document.getElementById("cart-container")
     cartContainer.innerHTML ="";
 
+    cartItem.forEach((item, index) => {
         const cartItemBtn = document.createElement('div')
         cartItemBtn.innerHTML = `
-        amefasdjfklasdjflkjadsklfhdjksf
+        <div class="flex items-center justify-between my-3 bg-[#F0FDF4] p-3 rounded-[8px] mx-auto">
+                  <div class="inter">
+                    <h1 class="font-semibold text-[14px]">${item.name}</h1>
+                    <p class="text-[16px] opacity-55"><span>${item.price}</span> x <span>${item.quantity}</span></p>
+                  </div>
+                  <i class="xmark fa-solid fa-xmark" onclick="removediv(this, ${index})"></i>
+                </div>
         `
-
         cartContainer.append(cartItemBtn);
+    })
+    totalAddCalculation();
+    // minus();
 }
 
 
@@ -165,7 +217,7 @@ const displayCard = (cards) => {
                       <p class="inter text-[14px] font-semibold">৳${card.price}</p>
                     </div>
 
-                    <button onclick="loadCart(${card})" class="btn btn-wide bg-[#15803D] self-end rounded-full text-white">Add To Cart</button>
+                    <button onclick="loadCart(${card.id})" class="btn btn-wide bg-[#15803D] self-end rounded-full text-white">Add To Cart</button>
                   </div>
       
         `
