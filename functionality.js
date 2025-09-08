@@ -76,6 +76,7 @@ const loadCart = (items)=> {
         }else{
             exists.quantity += 1;
         }
+        alert(`${plant.name} Has Been Added To The Card`);
         // cart.push(data.plants)
         displayCart(cart)
     })
@@ -237,7 +238,7 @@ const displayCatergory = (catergories) => {
     
         const allPlantbtn = document.createElement("div")
         allPlantbtn.innerHTML = `
-        <button id="allBtn" onclick= "loadallTrees()" class="bg-none w-full lg:text-md text-sm hover:bg-[#15803D] all-TreeBtn active border-none delay-20 hover:text-white lg:text-left text-center py-2 px-1 inter lg:rounded-[6px]">All Plants</button>
+        <button id="allBtn" onclick= "loadallTrees()" class="bg-none w-full lg:text-[16px] text-sm hover:bg-[#15803D] lg:my-1 all-TreeBtn active border-none delay-20 hover:text-white lg:text-left text-center py-2 px-1 inter lg:rounded-[6px]">All Plants</button>
         `
         categoryContainer.appendChild(allPlantbtn);
 
@@ -249,7 +250,7 @@ const displayCatergory = (catergories) => {
 
         const categoryBtns = document.createElement("div")
         categoryBtns.innerHTML = `
-        <button id="btn-${category.id}" onclick= "loadTrees(${category.id})" class="all-TreeBtn bg-none w-full lg:text-md text-sm hover:bg-[#15803D] delay-20 border-none hover:text-white lg:text-left text-center py-2 px-1 inter lg:rounded-[6px]">${category.category_name}</button>
+        <button id="btn-${category.id}" onclick= "loadTrees(${category.id})" class="all-TreeBtn bg-none w-full lg:text-[16px] lg:my-1 text-sm hover:bg-[#15803D] delay-20 border-none hover:text-white lg:text-left text-center py-2 px-1 inter lg:rounded-[6px]">${category.category_name}</button>
         `
 
         // append
