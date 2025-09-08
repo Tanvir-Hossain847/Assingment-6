@@ -143,7 +143,7 @@ const displayDetails = (details) => {
       <img class="py-3 rounded-4xl h-[350px] w-full object-cover" src="${details.image}" alt="">
       <p><span class="inter font-bold">Category:</span> ${details.category}</p>
       <p class="py-3"><span class="inter font-bold">Price:</span> ৳${details.price}</p>
-      <p><span class="inter font-bold">Description:</span> ${details.description}</p>
+      <p class="mb-7"><span class="inter font-bold">Description:</span> ${details.description}</p>
       </div>
     `;
     document.getElementById('my_modal_3').showModal();
@@ -165,7 +165,7 @@ const displayallTrees = (trees) => {
     for(let tree of trees){
         const cardsDiv = document.createElement('div')
         cardsDiv.innerHTML = `
-        <div class="card bg-white p-4 h-100 lg:w-11/12 w-2/3 mx-auto">
+        <div class="card bg-white p-4 h-100 lg:w-11/12 w-4/5 mx-auto">
                     
                     <div>
                       <img class="object-cover rounded-[8px] h-[150px] w-full" src="${tree.image}" alt="">
@@ -201,7 +201,7 @@ const displayCard = (cards) => {
         // create a div
         const cardsDiv = document.createElement('div')
         cardsDiv.innerHTML = `
-        <div class="card bg-white p-4 h-100 lg:w-11/12 w-2/3 mx-auto">
+        <div class="card bg-white p-4 h-100 lg:w-11/12 w-4/5 mx-auto">
                     
                     <div>
                       <img class="object-cover rounded-[8px] h-[150px] w-full" src="${card.image}" alt="">
@@ -237,7 +237,7 @@ const displayCatergory = (catergories) => {
     
         const allPlantbtn = document.createElement("div")
         allPlantbtn.innerHTML = `
-        <button id="allBtn" onclick= "loadallTrees()" class="bg-none w-full hover:bg-[#15803D] my-1 all-TreeBtn active border-none delay-20 hover:text-white lg:text-left text-center py-2 px-1 inter lg:rounded-[6px]">All Plants</button>
+        <button id="allBtn" onclick= "loadallTrees()" class="bg-none w-full hover:bg-[#15803D] all-TreeBtn active border-none delay-20 hover:text-white lg:text-left text-center py-2 px-1 inter lg:rounded-[6px]">All Plants</button>
         `
         categoryContainer.appendChild(allPlantbtn);
 
@@ -249,7 +249,7 @@ const displayCatergory = (catergories) => {
 
         const categoryBtns = document.createElement("div")
         categoryBtns.innerHTML = `
-        <button id="btn-${category.id}" onclick= "loadTrees(${category.id})" class="all-TreeBtn my-1 bg-none w-full hover:bg-[#15803D] delay-20 border-none hover:text-white lg:text-left text-center py-2 px-1 inter lg:rounded-[6px]">${category.category_name}</button>
+        <button id="btn-${category.id}" onclick= "loadTrees(${category.id})" class="all-TreeBtn bg-none w-full hover:bg-[#15803D] delay-20 border-none hover:text-white lg:text-left text-center py-2 px-1 inter lg:rounded-[6px]">${category.category_name}</button>
         `
 
         // append
