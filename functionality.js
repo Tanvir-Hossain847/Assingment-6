@@ -165,14 +165,14 @@ const displayallTrees = (trees) => {
     for(let tree of trees){
         const cardsDiv = document.createElement('div')
         cardsDiv.innerHTML = `
-        <div class="card bg-white p-4 h-100">
+        <div class="card bg-white p-4 h-100 lg:w-11/12 w-2/3 mx-auto">
                     
                     <div>
                       <img class="object-cover rounded-[8px] h-[150px] w-full" src="${tree.image}" alt="">
                     </div>
 
                     <div class="py-2">
-                      <h3 onclick= "loadDetails(${tree.id})" class="py-2 inter font-semibold text-[14px]">${tree.name}</h3>
+                      <h3 onclick= "loadDetails(${tree.id})" class="py-2 cursor-pointer inter font-semibold text-[14px]">${tree.name}</h3>
                       <p class="inter text-[12px] opacity-80 overflow-hidden text-ellipsis line-clamp-3">${tree.description}</p>
                     </div>
 
@@ -181,7 +181,7 @@ const displayallTrees = (trees) => {
                       <p class="inter text-[14px] font-semibold">৳${tree.price}</p>
                     </div>
 
-                    <button onclick="loadCart(${tree.id})" class="btn btn-wide w-full bg-[#15803D] self-end rounded-full text-white">Add To Cart</button>
+                    <button onclick="loadCart(${tree.id})" class="btn border-none w-full bg-[#15803D] rounded-full text-white">Add To Cart</button>
                   </div>
         `
 
@@ -201,14 +201,14 @@ const displayCard = (cards) => {
         // create a div
         const cardsDiv = document.createElement('div')
         cardsDiv.innerHTML = `
-        <div class="card bg-white p-4 h-100">
+        <div class="card bg-white p-4 h-100 lg:w-11/12 w-2/3 mx-auto">
                     
                     <div>
                       <img class="object-cover rounded-[8px] h-[150px] w-full" src="${card.image}" alt="">
                     </div>
 
                     <div class="py-2">
-                      <h3 onclick= "loadDetails(${card.id})" class="py-2 inter font-semibold text-[14px]">${card.name}</h3>
+                      <h3 onclick= "loadDetails(${card.id})" class="py-2 cursor-pointer inter font-semibold text-[14px]">${card.name}</h3>
                       <p class="inter text-[12px] opacity-80 overflow-hidden text-ellipsis line-clamp-3">${card.description}</p>
                     </div>
 
@@ -217,7 +217,7 @@ const displayCard = (cards) => {
                       <p class="inter text-[14px] font-semibold">৳${card.price}</p>
                     </div>
 
-                    <button onclick="loadCart(${card.id})" class="btn btn-wide bg-[#15803D] self-end rounded-full text-white">Add To Cart</button>
+                    <button onclick="loadCart(${card.id})" class="btn border-none w-full bg-[#15803D] self-end rounded-full text-white">Add To Cart</button>
                   </div>
       
         `
@@ -237,7 +237,7 @@ const displayCatergory = (catergories) => {
     
         const allPlantbtn = document.createElement("div")
         allPlantbtn.innerHTML = `
-        <button id="allBtn" onclick= "loadallTrees()" class="bg-none w-full hover:bg-[#15803D] my-1 all-TreeBtn active delay-700 border-none hover:text-white text-left py-2 px-1 inter rounded-[6px]">All Plants</button>
+        <button id="allBtn" onclick= "loadallTrees()" class="bg-none w-full hover:bg-[#15803D] my-1 all-TreeBtn active border-none delay-20 hover:text-white lg:text-left text-center py-2 px-1 inter lg:rounded-[6px]">All Plants</button>
         `
         categoryContainer.appendChild(allPlantbtn);
 
@@ -249,15 +249,15 @@ const displayCatergory = (catergories) => {
 
         const categoryBtns = document.createElement("div")
         categoryBtns.innerHTML = `
-        <button id="btn-${category.id}" onclick= "loadTrees(${category.id})" class="all-TreeBtn my-1 bg-none w-full hover:bg-[#15803D] delay-700 border-none hover:text-white text-left py-2 px-1 inter rounded-[6px]">${category.category_name}</button>
+        <button id="btn-${category.id}" onclick= "loadTrees(${category.id})" class="all-TreeBtn my-1 bg-none w-full hover:bg-[#15803D] delay-20 border-none hover:text-white lg:text-left text-center py-2 px-1 inter lg:rounded-[6px]">${category.category_name}</button>
         `
 
         // append
         categoryContainer.append(categoryBtns);
     }
+    loadallTrees();
 }
 
 
 
 loadCategoryBtn();
-loadallTrees();

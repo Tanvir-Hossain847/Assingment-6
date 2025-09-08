@@ -85,10 +85,10 @@
                <div class="relative">
 
                  <div class="">
-                <span id="spinner" class="py-10 loading loading-dots loading-xl hidden absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"></span>
+                <span id="spinner" class="py-10 loading loading-dots loading-xl hidden absolute lg:left-1/2 lg:top-1/2 lg:-translate-x-1/2 lg:-translate-y-1/2 left-1/2 top-11/12"></span>
               </div>
 
-               <div class="choose-tree pt-[40px] lg:flex justify-between gap-7 lg:w-11/12 mx-auto">
+               <div class="choose-tree pt-[40px] flex lg:flex-row flex-col justify-between gap-7 lg:w-11/12 mx-auto">
               
 
               <div class="catagory-container space-y-3 grow-0 shrink-0 basis-[18%]">
@@ -99,12 +99,12 @@
                 </div>
 
                 
-                <div id="card-container" class="grow-0 shrink-0 basis-[62%] grid lg:grid-cols-3 grid-cols-1 gap-4">
+                <div id="card-container" class="grow-0 py-3 shrink-0 basis-[62%] grid lg:grid-cols-3 grid-cols-1 gap-4">
              
                 </div>
 
 
-                <div class="bg-white p-3 rounded-2xl grow-0 shrink-0 basis-[18%]">
+                <div class="bg-white p-3 rounded-2xl grow-0 shrink-0 lg:basis-[18%] w-11/12 mx-auto">
                 <h1 class="inter font-semibold text-[20px]">Your Cart</h1>
 
                 <div id="cart-container" class="py-4">
@@ -113,7 +113,7 @@
 
                 <div id="total" class="flex items-center justify-between">
                   <h1 class="inter font-semibold">Total</h1>
-                  <p>৳<span id="amount">2000</span></p>
+                  <p class="font-bold inter">৳<span id="amount" class="font-bold inter">0</span></p>
                 </div>
                 </div>
 
@@ -182,11 +182,17 @@
 
           <fieldset class="fieldset bg-[#15803D] border-none rounded-box md:w-lg w-sm border p-6 gap-2 mx-auto">
 
-  <input type="email" class="input w-full active:outline-none" placeholder="Email" />
+  <input type="text" class="input w-full focus:outline-none" placeholder="Name" />
 
-  <input type="password" class="input w-full active:outline-none" placeholder="Password" />
+  <input type="email" class="input w-full focus:outline-none" placeholder="Email" />
 
-  <input type="password" class="input w-full active:outline-none" placeholder="Password" />
+  <select class="input w-full focus:outline-none">
+    <option value="">1</option>
+    <option value="">2</option>
+    <option value="">3</option>
+    <option value="">4</option>
+    <option value="">5</option>
+  </select>
 
   <button class="btn btn-neutral mt-4 bg-[#FACC15] text-[#166534] border-none rounded-full">Login</button>
 </fieldset>
